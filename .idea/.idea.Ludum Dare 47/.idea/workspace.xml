@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="794e82e1-21d9-4100-a8f2-663e88a95bed" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Inventory_System/CarriableItem_SO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interacting Objects system/InteractableObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8691AD70-05ED-4755-A182-8378FF0B52B1/7e/6a69a68b/AddComponentMenu.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interacting Objects system/Interactable Objects/PickupWeapon.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Inventory_System/PlayerInventory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Actors/Player/PassiveStatsManager.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_System/Item_SO.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_System/EquipableItem_SO.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_System/NewBehaviourScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_System/PlayerPickup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_System/IInventoryComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Interacting Objects system/InteractableObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_System/CarriableItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_System/CarriableWeapon.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Interacting Objects system/Interactable Objects/PickupItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_System/CarriableItem_SO.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actors/HealthSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actors/Player/PlayerWeapon.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actors/Enemy/EnemyController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actors/Enemy/EnemyAttacking.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_System/Weapon_SO.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actors/Player/PassiveStatsManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Interacting Objects system/Interactable Objects/PickupWeapon.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_System/PlayerInventory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/BasicProjectile.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actors/Player/PlayerController.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1iMdzoXcAIL2ZAIkmfLPcU6ZBm2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="794e82e1-21d9-4100-a8f2-663e88a95bed" name="Default Changelist" comment="" />
+      <created>1601721662988</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601721662988</updated>
+      <workItem from="1601721669114" duration="41532000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="474" y="28" key="RiderGenerateDialog" timestamp="1601777443918">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="474" y="28" key="RiderGenerateDialog/0.0.1280.680/-1680.33.1680.1010@0.0.1280.680" timestamp="1601777443918" />
+    <state x="474" y="62" key="RiderGenerateDialog/0.0.1280.720/-1680.34.1680.1050@0.0.1280.720" timestamp="1601732597738" />
+    <state x="142" y="5" key="SettingsEditor" timestamp="1601722769896">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="142" y="5" key="SettingsEditor/0.0.1280.720/-1680.34.1680.1050@0.0.1280.720" timestamp="1601722769896" />
+    <state x="297" y="151" key="run.anything.popup" timestamp="1601737100246">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680/-1680.34.1680.1010@0.0.1280.680" timestamp="1601737100246" />
+    <state x="303" y="41" width="672" height="678" key="search.everywhere.popup" timestamp="1601724772139">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="303" y="41" width="672" height="678" key="search.everywhere.popup/0.0.1280.720/-1680.34.1680.1050@0.0.1280.720" timestamp="1601724772139" />
+  </component>
+</project>
