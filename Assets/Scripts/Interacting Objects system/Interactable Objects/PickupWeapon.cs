@@ -22,8 +22,8 @@ public class PickupWeapon : InteractableObject
                 }
                 else
                 {
-                    str += "swap your" + PlayerInventory.Instance.GetCurrentWeapon() +
-                           " With " + WeaponSo.GetWeaponType();
+                    str += "swap " +// PlayerInventory.Instance.GetCurrentWeapon() +
+                           " for " + WeaponSo.GetWeaponType();
                 }
             }
             return str;

@@ -35,6 +35,7 @@ namespace Assets.Scripts.Inventory_System
         {
             Null,
             Shotgun,
+            Pistol,
             Axe,
             Sword,
             Shield

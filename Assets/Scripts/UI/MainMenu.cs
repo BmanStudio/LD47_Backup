@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
     public void ClosePause() {
         pauseScreen.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1;
 
     }
 
@@ -28,9 +29,16 @@ public class MainMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) )
         {
             if (pauseScreen.activeSelf)
+            {
                 Cursor.lockState = CursorLockMode.Locked;
-            else 
-            Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 1;
+            }
+            else
+            { 
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0;
+            
+            }
 
             pauseScreen.SetActive(!pauseScreen.activeSelf);
 

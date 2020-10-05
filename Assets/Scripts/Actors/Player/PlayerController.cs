@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10.0f;
     [SerializeField] float jumpPower = 8;
+    public bool canTakeActions = true;
 
-
-    [SerializeField] PlayerWeapon _weapon = null;
+   PlayerWeapon _weapon = null;
 
     public PlayerWeapon Weapon
     {
@@ -33,13 +33,14 @@ public class PlayerController : MonoBehaviour
         // turn off the cursor
         Cursor.lockState = CursorLockMode.Locked;
         cam =GetComponentInChildren<Camera>();
-        rigidBody = GetComponent<Rigidbody>();
+        rigidBody = GetComponentInChildren<Rigidbody>();
         
     }
 
 
     void Update()
     {
+        if (!canTakeActions) return;
         camForward.x = cam.transform.forward.x;
         camForward.z = cam.transform.forward.z;
         transform.Translate(camForward.normalized * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime,Space.World);
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
             rigidBody.velocity += jumpPower * Vector3.up;
         }
         if (_weapon!=null && Input.GetKey(KeyCode.Mouse0)) {
-            _weapon.Fire(cam.transform.forward);
+            _weapon.Fire(cam.transform.forward,gameObject);
         }
     }
     

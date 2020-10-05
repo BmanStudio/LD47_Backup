@@ -22,18 +22,21 @@ public class PlayerWeapon : MonoBehaviour
         startedDamage = damage;
     }
 
-    public  void Fire(Vector3 direction) {
-        if (muzzle != null &  fireEffect != null && projectile!=null && canFire)
+    public  void Fire(Vector3 direction,GameObject player) {
+        if (muzzle != null & fireEffect != null && projectile != null && canFire)
         {
             fireEffect.Play();
             GameObject bullet = Instantiate(projectile, muzzle.position, muzzle.rotation);
             bullet.GetComponent<BasicProjectile>().Damage = damage;
-            bullet.GetComponent<BasicProjectile>().Shooter = gameObject;
+            bullet.GetComponent<BasicProjectile>().Shooter = player;
             bullet.GetComponent<Rigidbody>().AddForce(direction * projectileSpeed);
             canFire = false;
             attackTimer = 0;
 
 
+        }
+        else if(canFire){
+            Debug.LogError("Attempting to use a weapon that isn't properly configured");
         }
     }
 

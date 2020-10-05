@@ -7,13 +7,18 @@ using UnityEngine.UI;
 public class HealthSystem : MonoBehaviour
 {
     [SerializeField]
-    float maxHealth=100;
+    float maxHealth = 100;
     float currentHealth;
 
     [SerializeField]
     Text healthIndicator = null;
 
     // Added by Bman:
+
+    public delegate void ActorInjury();
+
+    public event ActorInjury OnTookDamage;
+    
     private float startingMaxHealth;
     void Awake()
     {
@@ -30,6 +35,7 @@ public class HealthSystem : MonoBehaviour
 
     public void TakeDamage(float damage) {
         currentHealth = Math.Max(0, currentHealth - damage);
+        OnOnTookDamage();
         UpdateHealthIndicator();
         if (currentHealth <= 0) {
             Die();
@@ -38,8 +44,11 @@ public class HealthSystem : MonoBehaviour
 
     private void Die()
     {
+        if (gameObject.GetComponent<PlayerController>()) {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOverScene");
+        }
         //For now
-        Destroy(gameObject, 0);
+        else Destroy(gameObject, 0);
     }
 
     void UpdateHealthIndicator() {
@@ -59,5 +68,14 @@ public class HealthSystem : MonoBehaviour
         Debug.Log("Updated the max health cuz of a passive bonus, now the max is "
                   + maxHealth + " and the new relative health is " + currentHealth);
     }
-    
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    protected virtual void OnOnTookDamage()
+    {
+        OnTookDamage?.Invoke();
+    }
 }

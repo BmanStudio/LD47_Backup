@@ -20,20 +20,20 @@ public class FPSCamera : MonoBehaviour
     {
         if (axes == RotationAxes.MouseXAndY)
         {
-            float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * Settings.MouseSensitivity;
+            float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * Settings.MouseSensitivity*Time.timeScale;
 
-            rotationY += Input.GetAxis("Mouse Y") * Settings.MouseSensitivity;
+            rotationY += Input.GetAxis("Mouse Y") * Settings.MouseSensitivity * Time.timeScale;
             rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
 
             transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
         }
         else if (axes == RotationAxes.MouseX)
         {
-            transform.Rotate(0, Input.GetAxis("Mouse X") * Settings.MouseSensitivity, 0);
+            transform.Rotate(0, Input.GetAxis("Mouse X") * Settings.MouseSensitivity * Time.timeScale, 0);
         }
         else
         {
-            rotationY += Input.GetAxis("Mouse Y") * Settings.MouseSensitivity;
+            rotationY += Input.GetAxis("Mouse Y") * Settings.MouseSensitivity * Time.timeScale;
             rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
 
             transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);

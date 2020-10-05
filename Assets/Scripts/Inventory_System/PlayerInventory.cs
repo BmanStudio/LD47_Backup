@@ -289,6 +289,7 @@ public class PlayerInventory : MonoBehaviour
                         Quaternion.identity, parent:weaponSlotGameObject);
                 _currentWeaponGameObject.transform.localRotation = Quaternion.Euler(0,0,0);
                 _currentWeapon = weaponSo;
+                _currentWeaponGameObject.transform.parent= weaponSlotGameObject;
             }
         }
     }

@@ -32,6 +32,9 @@ public class RoomManager : MonoBehaviour
         {
             
             GameObject roomObj = Instantiate(trainRepeat, pos, Quaternion.identity);
+            // Added by Bman:
+            //roomObj.isStatic = true;
+            
             Room room = roomObj.GetComponent<Room>();
             room.roomManager = this;
             room.index = index;

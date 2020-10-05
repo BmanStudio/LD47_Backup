@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 3480397212955369304}
   - component: {fileID: 3480397212955369301}
   - component: {fileID: 3480397212955369310}
+  - component: {fileID: 9014622578887108352}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -168,6 +169,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de7f9b461097f548b58f778b040c78a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionDistance: 2
+  GUIHintText: {fileID: 0}
+--- !u!136 &9014622578887108352
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480397212955369303}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!1 &3480397213098553607
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,8 +200,8 @@ GameObject:
   - component: {fileID: 3480397213098553605}
   - component: {fileID: 3480397213098553614}
   - component: {fileID: 3480397213098553610}
-  m_Layer: 0
-  m_Name: Player_Prefab
+  m_Layer: 10
+  m_Name: Player_Prefab_Bman
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,12 +230,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3480397213098553607}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!114 &3480397213098553608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpPower: 5
+  canTakeActions: 1
 --- !u!54 &3480397213098553609
 Rigidbody:
   m_ObjectHideFlags: 0

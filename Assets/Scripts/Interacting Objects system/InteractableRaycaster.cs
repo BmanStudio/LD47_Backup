@@ -2,23 +2,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractableRaycaster : MonoBehaviour
 {
+   [SerializeField] [Range(0,20)] float interactionDistance=2f;
+    [SerializeField] Text GUIHintText = null;
     public void Update()
     {
         var allHits = ShootRayCast();
 
         var ad = Interact(allHits);
+        if (!ad && GUIHintText) {
+            GUIHintText.text = "";
+        }
         ChangePointerColor(allHits, ad);
     }
 
     private RaycastHit[] ShootRayCast()
     {
-        var screenCenter = new Vector2(Screen.width, Screen.height) / 2;
-        var ray = Camera.main.ScreenPointToRay(screenCenter);
-
-        return Physics.RaycastAll(transform.position, transform.forward, 10);
+        Debug.DrawRay(transform.position, transform.forward.normalized* interactionDistance, Color.green);
+        
+        return Physics.RaycastAll(transform.position, transform.forward.normalized, interactionDistance);
     }
 
     private bool Interact(RaycastHit[] allHits)
@@ -26,15 +31,20 @@ public class InteractableRaycaster : MonoBehaviour
         foreach (var hit in allHits)
         {
             if (hit.transform.CompareTag("Player")) continue;
-            if (!hit.transform.gameObject.GetComponent<InteractableObject>()) break;
-            
             var intObject = hit.transform.gameObject.GetComponent<InteractableObject>();
+            if (!intObject) continue;
 
-            Debug.Log(intObject.HintText);
-            // TODO: Show hintText on UI
+            if(GUIHintText)
+            GUIHintText.text = intObject.HintText;
+            
 
             //TODO: replace with the reference to the Interact key
-            if (Input.GetKeyDown(KeyCode.F)) intObject.Interact();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                intObject.Interact();
+
+            }
+
 
             return intObject.Interactable;
         }

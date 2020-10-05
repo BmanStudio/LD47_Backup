@@ -51,4 +51,9 @@ public class Typewritter : MonoBehaviour
         _speed = speed;
         _text = text;
     }
+
+    public void NewQuestion(string text, string eText, string fText)
+    {
+        
+    }
 }

@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4df17e2c13a9742a6a7c25debab8f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToDie: 3
 --- !u!54 &7476892200850946090
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -207,7 +208,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7476892200850946080}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.08
   m_Height: 0.01
