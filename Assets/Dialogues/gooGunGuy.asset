@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2afdde1d411700349931786a4bc7614e, type: 3}
+  m_Name: gooGunGuy
+  m_EditorClassIdentifier: 
+  subDialogs:
+  - 'That "freeze ray" guy''s a nutter '
+  - 'Sticking buckets out the window and trying to catch something that doesn''t
+    exist, totally out of his mind. '
+  - If you're going to do anything about that damn engine, you're going to need to
+    gum up the works.  Here's a goo gun!  Nothing crazy, it's just oil and metal
+    shavings mixed together, it's really abrasive and hard, so you get this on anything
+    mechanical it's going to tear itself apart.
+  branches: []

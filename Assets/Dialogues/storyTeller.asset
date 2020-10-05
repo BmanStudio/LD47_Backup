@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2afdde1d411700349931786a4bc7614e, type: 3}
+  m_Name: storyTeller
+  m_EditorClassIdentifier: 
+  subDialogs:
+  - 'You''re new to the train, I can tell! you don''t look as tired as the rest of
+    us, I can see that by looking at your eyes! but you''ve seen things, I can tell
+    that, just another day in life for you, huh? '
+  - 'You might know it all already kid, but let me lay out the land for ya.  You
+    already know the trains a loop, we figured that out by looking out back, there''s
+    an engine pushing us, which is the wrong place the the engine to be.  We been
+    passing the same damn trees and lights this whole time, it''s just a damn loop. '
+  - If you're going to do anything about this, and you might know more than we do,
+    but you're going to have to get us off this loop, decouple these carriages from
+    the engine and split us off from the rest of the train.  I don't know how you
+    gonna pull that off, but that's the consensus from the people in this train.
+  branches: []

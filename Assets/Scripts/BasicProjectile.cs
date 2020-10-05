@@ -18,14 +18,14 @@ public class BasicProjectile : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         //Make sure that when this is fire it will stop at obsticles OR player.
+       
         HealthSystem hs = other.GetComponent<HealthSystem>();
-        if (hs != null) {
-            hs.TakeDamage(Damage);
+        if (hs != null && other.gameObject != Shooter) {
+            hs.TakeDamage(damage);
         }
         if(!other.isTrigger && other.gameObject != Shooter) {
             Destroy(this.gameObject, 0);
         }
 
-        Rigidbody rb;
     }
 }

@@ -14,6 +14,8 @@ namespace Assets.Scripts.Actors.Enemy
         [SerializeField] float _delayBetweenStateMachineUpdate = 0.2f;
         [SerializeField] public bool isBoss = false;
         [SerializeField] public float HardSearchTime = 5;
+        [SerializeField] public float RespondeAttackTime = 3;
+        [SerializeField] Animator animator=null;
 
 
         public float DetectStateDelayTime = 1;
@@ -56,8 +58,10 @@ namespace Assets.Scripts.Actors.Enemy
                 if (_attackTimer >= _enemyAttacker.FireCooldown) {
                     _enemyAttacker.Attack();
                     _attackTimer = 0;
+                    if (animator) animator.SetBool("Attack", true);
                 }
             }
+
         }
         
         // Subscribed to the healthSystem onTookDamage event
@@ -101,8 +105,6 @@ namespace Assets.Scripts.Actors.Enemy
             private readonly HealthSystem _healthSystem;
             private readonly EnemyMovement _enemyMovement;
             
-            private const float HealthRunThreshold = 20f;
-
             public StateMachine(EnemyAIBrain enemyAiBrain, FieldOfView fov,
                 HealthSystem healthSystem, EnemyMovement enemyMovement)
             {
@@ -114,49 +116,74 @@ namespace Assets.Scripts.Actors.Enemy
             
             private float _detectDelayTimer;
             private float _hardSearchTimer;
-            private const float HardSearchCooldown = 3;
+            private float _respondeAttackTimer;
+            
+            private const float HardSearchCooldown = 1;
+            private const float HealthRunThreshold = 20f;
+
 
             private Vector3 _playerLastSeenPos;
 
             public void UpdateState()
             {
-                Debug.Log(CurrentState);
                 // If the AI see the player
-                if (_fieldOfView.visibleTargets.Count >= 1)
+                if (_fieldOfView.visibleTargets.Count > 0)
                 {
                     // Safety throw:
                     if (_fieldOfView.visibleTargets.Count > 1)
                     {
                         Debug.LogError("Enemy " + this._enemyAiBrain.gameObject + "got 2 targets");
                     }
-                    
+
                     var player = _fieldOfView.visibleTargets[0];
                     _playerLastSeenPos = player.position;
                     
+                    
+                    if (!_enemyMovement.GetIsRotatingToPlayer())
+                    {
+                        _enemyMovement.LookAtTarget(player);
+                    }
+                    
                     // If health is below threshold we should run away
-                    if (_healthSystem.GetCurrentHealth() <= HealthRunThreshold)
+                    /*if (CurrentState != State.RunAway && _healthSystem.GetCurrentHealth() <= HealthRunThreshold)
                     {
                         _enemyMovement.ToggleChaseSpeed(true);
                         CurrentState = State.RunAway;
-                        return;
+                        if (_enemyMovement.GetIsRotatingToPlayer() && _respondeAttackTimer <= 0)
+                        {
+                            _enemyMovement.StopLookingAtTarget();
+                        }
+                        _enemyMovement.MoveToRandomPointWithMinDistFromPlayer(_playerLastSeenPos, 35);
                     }
 
-                    if (CurrentState == State.RunAway)
+                    if (CurrentState == State.RunAway && _enemyMovement.GetIsNavMeshStopped())
                     {
-                        _enemyMovement.MoveToRandomPointWithMinDistFromPlayer(_playerLastSeenPos, 10);
-                    }
+                        if (_enemyMovement.GetIsRotatingToPlayer() && _respondeAttackTimer <= 0)
+                        {
+                            _enemyMovement.StopLookingAtTarget();
+                        }
+                        _enemyMovement.MoveToRandomPointWithMinDistFromPlayer(_playerLastSeenPos, 35);
+                    }*/
                     
                     // Checking if the current state is attacking
                     // means we should keep attacking
                     else if (CurrentState == State.Attack)
                     {
+                        // If the player just shot the AI, the AI will attack even if the player
+                        // is Static for T = RespondeAttackTime
+                        if (_respondeAttackTimer >= 0)
+                        {
+                            _respondeAttackTimer -= Time.deltaTime + _enemyAiBrain._delayBetweenStateMachineUpdate;
+                            return;
+                        }
+                        
                         // Only attacks moving targets, unless you're the boss :)
                         // Moving to HardSearch state instead (looking at the player position)
                         if (!_enemyAiBrain.isBoss && player.GetComponentInChildren<Rigidbody>().velocity.magnitude == 0)
                         {
                             _hardSearchTimer = _enemyAiBrain.HardSearchTime;
                             CurrentState = State.HardSearch;
-                            _fieldOfView.SetupLight(Color.magenta);
+                            _fieldOfView.SetupLight(Color.magenta, 2);
                         }
                     }
                     
@@ -199,7 +226,7 @@ namespace Assets.Scripts.Actors.Enemy
                         if (_enemyAiBrain.GetPlayerInAttackRange(player.position))
                         {
                             CurrentState = State.Attack;
-                            _fieldOfView.SetupLight(Color.red);
+                            _fieldOfView.SetupLight(Color.red, 4);
                             _enemyMovement.StopMoving();
                         }
                         else
@@ -217,7 +244,8 @@ namespace Assets.Scripts.Actors.Enemy
                         if (player.GetComponentInChildren<Rigidbody>().velocity.magnitude != 0)
                         {
                             CurrentState = State.Attack;
-                            _fieldOfView.SetupLight(Color.red);
+                            _enemyMovement.StopMoving();
+                            _fieldOfView.SetupLight(Color.red, 4);
                             return;
                         }
 
@@ -233,12 +261,21 @@ namespace Assets.Scripts.Actors.Enemy
                     }
                     else if (CurrentState == State.IdleSearch)
                     {
+                        if (_enemyMovement.GetIsRotatingToPlayer() && _respondeAttackTimer <= 0)
+                        {
+                            _enemyMovement.StopLookingAtTarget();
+                        }
+                        // If just was in HardSearch, wait 1 sec before detect again
                         _hardSearchTimer -= Time.deltaTime + _enemyAiBrain._delayBetweenStateMachineUpdate;
                         if (_hardSearchTimer <= -HardSearchCooldown)
                         {
                             _detectDelayTimer = _enemyAiBrain.DetectStateDelayTime;
                             CurrentState = State.Detect;
-                            _fieldOfView.SetupLight(Color.cyan);
+                            _fieldOfView.SetupLight(Color.cyan, 1.3f);
+                        }
+                        else if (_enemyMovement.GetIsNavMeshStopped())
+                        {
+                            _enemyMovement.MoveToRandomPointWithMaxDistFromPlayer(_playerLastSeenPos, 40);
                         }
                     }
                 }
@@ -246,31 +283,48 @@ namespace Assets.Scripts.Actors.Enemy
                 // If the AI cant see the player
                 else
                 {
+                    if (_enemyMovement.GetIsRotatingToPlayer() && _respondeAttackTimer <= 0)
+                    {
+                        _enemyMovement.StopLookingAtTarget();
+                    }
+                    
+                    /*if (CurrentState != State.RunAway && _healthSystem.GetCurrentHealth() <= HealthRunThreshold)
+                    {
+                        _enemyMovement.StopLookingAtTarget();
+                        _enemyMovement.ToggleChaseSpeed(true);
+                        CurrentState = State.RunAway;
+                        _enemyMovement.MoveToRandomPointWithMinDistFromPlayer(_playerLastSeenPos, 35);
+                    }*/
+                    
                     if (CurrentState == State.Attack)
                     {
+                        _enemyMovement.MoveToRandomPointWithMaxDistFromPlayer(_playerLastSeenPos, 1);
                         _hardSearchTimer = _enemyAiBrain.HardSearchTime;
                         CurrentState = State.HardSearch;
-                        _fieldOfView.SetupLight(Color.magenta);
-                        _enemyMovement.MoveToRandomPointWithMaxDistFromPlayer(_playerLastSeenPos, 3);
+                        _fieldOfView.SetupLight(Color.magenta, 2);
                     }
                     else if (CurrentState == State.HardSearch)
                     {
                         // todo add looking animation
                         _hardSearchTimer -= Time.deltaTime + _enemyAiBrain._delayBetweenStateMachineUpdate;
 
-                        if (_hardSearchTimer <= 0)
+                        if (_hardSearchTimer <= 0 && _enemyMovement.GetIsNavMeshStopped())
                         {
                             _enemyMovement.ToggleChaseSpeed(false);
                             CurrentState = State.IdleSearch;
                             _enemyMovement.MoveToRandomPointWithMaxDist(3);    
                             _fieldOfView.SetupLight(Color.yellow);
                         }
+                        else if (_enemyMovement.GetIsNavMeshStopped())
+                        {
+                            //_enemyMovement.LookAtPoint(_playerLastSeenPos);
+                            _enemyMovement.MoveToRandomPointWithMaxDistFromPlayer(_playerLastSeenPos, 3);
+                        }
                     }
                     
                     // Should pick a random point to go to in 
                     else if (CurrentState == State.IdleSearch)
                     {
-                        Debug.Log(_enemyMovement.GetIsNavMeshStopped());
                         // If the AI reached the destination and stopped
                         if (_enemyMovement.GetIsNavMeshStopped())
                         {
@@ -302,7 +356,7 @@ namespace Assets.Scripts.Actors.Enemy
                     {
                         _hardSearchTimer = _enemyAiBrain.HardSearchTime;
                         CurrentState = State.HardSearch;
-                        _fieldOfView.SetupLight(Color.magenta);
+                        _fieldOfView.SetupLight(Color.magenta, 2);
                         _enemyMovement.MoveToRandomPointWithMaxDistFromPlayer(_playerLastSeenPos, 3);
                     }
                     else if (CurrentState == State.Detect)
@@ -312,17 +366,53 @@ namespace Assets.Scripts.Actors.Enemy
                         _enemyMovement.MoveToRandomPointWithMaxDist(5);    
                         _fieldOfView.SetupLight(Color.yellow);
                     }
-                    else if (CurrentState == State.RunAway)
+                    /*else if (CurrentState == State.RunAway)
                     {
+                        _enemyMovement.StopLookingAtTarget();
+                        
                         if (_enemyMovement.GetIsNavMeshStopped())
                         {
                             _enemyMovement.ToggleChaseSpeed(false);
                             CurrentState = State.IdleSearch;
-                            _enemyMovement.MoveToRandomPointWithMaxDist(5);    
+                            _enemyMovement.MoveToRandomPointWithMinDistFromPlayer(_playerLastSeenPos, 15);    
                             _fieldOfView.SetupLight(Color.yellow);
                         }
-                    }
+                    }*/
                 }
+            }
+            
+            public void InvokeResponseForDamage()
+            {
+                _respondeAttackTimer = _enemyAiBrain.RespondeAttackTime;
+                var player = PlayerInventory.Instance.transform;
+                _playerLastSeenPos = player.position;
+                _enemyMovement.LookAtTarget(player);
+                CurrentState = State.Attack;
+                _fieldOfView.SetupLight(Color.red, 4);
+                
+                /*if (_enemyAiBrain.GetPlayerInAttackRange(player.position))
+                {
+                    CurrentState = State.Attack;
+                    _fieldOfView.SetupLight(Color.red, 4);
+                }
+                
+                else
+                {
+                    _enemyMovement.GoToTarget(player);
+                }*/
+                
+                /*if (CurrentState != State.Attack && CurrentState != State.HardSearch)
+                {
+                    _enemyMovement.ToggleChaseSpeed(true);
+                    _hardSearchTimer = _enemyAiBrain.HardSearchTime;
+                    CurrentState = State.HardSearch;
+                    _fieldOfView.SetupLight(Color.magenta, 2);
+                }
+                else
+                {
+                    CurrentState = State.Attack;
+                    _fieldOfView.SetupLight(Color.red, 4);
+                }*/
             }
 
             /// <summary>
@@ -348,16 +438,6 @@ namespace Assets.Scripts.Actors.Enemy
                 Attack,
                 Chase,
                 RunAway
-            }
-
-            public void InvokeResponseForDamage()
-            {
-                var player = PlayerInventory.Instance.transform;
-                _enemyMovement.GoToTarget(player);
-                _enemyMovement.ToggleChaseSpeed(true);
-                _hardSearchTimer = _enemyAiBrain.HardSearchTime;
-                CurrentState = State.HardSearch;
-                _fieldOfView.SetupLight(Color.magenta);
             }
         }
     }

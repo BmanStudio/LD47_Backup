@@ -9,27 +9,33 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float _enemyHeight = 1.18f;
     [SerializeField] private float _idleSpeed = 5f;
     [SerializeField] private float _chaseSpeed = 8.5f;
+    [SerializeField] private float rotateToPlayerSpeed = 2f;
 
-    //private bool _isFollowing = false;
-    //private Transform _followTarget;
+    private bool _isRotationg = false;
+    private Transform _lookAtTarget;
+    private float _rotationCompareThreshold = 0.3f;
 
     void OnEnable()
     {
         _navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
 
-        _navMeshAgent.stoppingDistance = 2;
+        _navMeshAgent.stoppingDistance = 3;
         _navMeshAgent.height = _enemyHeight;
         _navMeshAgent.autoBraking = true;
         _navMeshAgent.speed = _idleSpeed;
     }
 
-    /*void Update()
+    void Update()
     {
-        if (_isFollowing && _followTarget != null)
+        if (_isRotationg)
         {
-            _navMeshAgent.SetDestination(_followTarget.position);
+            Quaternion lookOnLook =
+                Quaternion.LookRotation(_lookAtTarget.position - transform.position);
+ 
+            transform.rotation =
+                Quaternion.Slerp(transform.rotation, lookOnLook, rotateToPlayerSpeed * Time.deltaTime);
         }
-    }*/
+    }
     
     public void MoveTo(Vector3 worldPosition, bool forceChange = true)
     {
@@ -118,6 +124,27 @@ public class EnemyMovement : MonoBehaviour
     public bool GetIsNavMeshStopped()
     {
         return Vector3.Distance(_navMeshAgent.destination,transform.position) < _navMeshAgent.stoppingDistance + 1;
+    }
+
+    public void LookAtTarget(Transform target)
+    {
+        _isRotationg = true;
+        _lookAtTarget = target;
+    }
+
+    public void LookAtPoint(Vector3 point)
+    {
+        transform.LookAt(point);
+    }
+
+    public void StopLookingAtTarget()
+    {
+        _isRotationg = false;
+    }
+
+    public bool GetIsRotatingToPlayer()
+    {
+        return _isRotationg;
     }
 
     /*public void StopFollowTarget()

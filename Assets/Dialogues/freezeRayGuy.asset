@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2afdde1d411700349931786a4bc7614e, type: 3}
+  m_Name: freezeRayGuy
+  m_EditorClassIdentifier: 
+  subDialogs:
+  - 'You must have been sent from outside?  '
+  - 'I''ve built a weapon here, it''s a simple freeze ray. Don''t ask me to explain
+    how it works, but here''s a cartridge. Whatever it is outside this train it''s
+    cold, really cold, and it''s not normal matter like we''re used to. I''ve captrued
+    some of it and managed to trap it inside these cartridges, there are only a few,
+    so be sparing.  '
+  - 'I had the idea of freezing the train''s engine, I managed to sneak my way up
+    there once, and could see it''s well hot, way beyond what should be normal. If
+    someone can get up there with the freeze ray, I''m betting hitting it with this
+    will put some serious cool down on the engine, and maybe stop this madness.  '
+  - 'That being said, I''m not sure there are enough cartridges to completely freeze
+    the engine, and there are no more materials I can use to capture more.  '
+  branches: []

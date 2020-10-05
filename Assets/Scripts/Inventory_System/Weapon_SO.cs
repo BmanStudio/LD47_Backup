@@ -12,6 +12,7 @@ namespace Assets.Scripts.Inventory_System
         [SerializeField] private float _weaponPower = 0;
         [SerializeField] private float _weaponSpeed = 0;
         [SerializeField] public GameObject weaponPrefab = null;
+        [SerializeField] public AudioClip[] fireSounds = null;
         
         public EWeaponType GetWeaponType() => this._weaponType;
 

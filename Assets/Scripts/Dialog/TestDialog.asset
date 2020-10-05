@@ -17,13 +17,16 @@ MonoBehaviour:
   - You may not know me
   - but i dont know you
   - really
+  voiceOvers:
+  - forDialog: 2
+    clip: {fileID: 8300000, guid: 63f5c59ab5686154aae5d6664b2d6c31, type: 3}
   branches:
   - forDialog: 1
     qBranch: 3
     eBranch: -1
     qBranchText: Wait! I know youi
     eBranchText: 
-    qEffect: 1
+    qEffect: 4
     eEffect: 2
   - forDialog: 2
     qBranch: -1

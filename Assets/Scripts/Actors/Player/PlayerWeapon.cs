@@ -12,6 +12,7 @@ public class PlayerWeapon : MonoBehaviour
     public float attackCooldown=0.5f;
     private float attackTimer = 0;
     bool canFire = true;
+    public AudioClip[] fireClips=null;
     
     
     // Added by Bman:
@@ -32,6 +33,9 @@ public class PlayerWeapon : MonoBehaviour
             bullet.GetComponent<Rigidbody>().AddForce(direction * projectileSpeed);
             canFire = false;
             attackTimer = 0;
+            if (fireClips != null && fireClips.Length > 0) {
+                player.GetComponent<AudioSource>().PlayOneShot(fireClips[Random.Range(0,fireClips.Length)]);
+            }
 
 
         }

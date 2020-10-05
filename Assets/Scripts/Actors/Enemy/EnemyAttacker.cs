@@ -18,7 +18,7 @@ public class EnemyAttacker : MonoBehaviour
 
     void Start()
     {
-        _player = PlayerInventory.Instance.transform;
+        _player = PlayerInventory.Instance.GetPlayerTransform();
     }
     
     public void StartAttackPlayer(GameObject player) {
@@ -53,10 +53,10 @@ public class EnemyAttacker : MonoBehaviour
         }
         else if(_projectile!=null) {
             //Debug.Log("TODO: Indicate Ranged attack");
-            GameObject bullet = Instantiate(_projectile, _projectileStartPoint.position, Quaternion.identity);
+            GameObject bullet = Instantiate(_projectile, _projectileStartPoint.position, Quaternion.Euler(0,0,-90));
             bullet.GetComponent<BasicProjectile>().Damage = damage;
             bullet.GetComponent<BasicProjectile>().Shooter = gameObject;
-            bullet.GetComponent<Rigidbody>().AddForce(((_player.position - new Vector3(0, 0.7f,0)) - transform.position).normalized * projectileSpeed);
+            bullet.GetComponent<Rigidbody>().AddForce(((_player.position - new Vector3(0, 1.2f,0)) - transform.position).normalized * projectileSpeed);
 
         }
     }

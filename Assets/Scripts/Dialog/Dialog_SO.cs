@@ -7,6 +7,7 @@ using UnityEngine;
 public class Dialog_SO : ScriptableObject
 {
     public List<string> subDialogs;//please remember the index
+    public List<VoiceOver> voiceOvers;
     public List<Branch> branches;//The dialogs that branch in "forDialog", then use index for where it branchs to. please remember that it goes to the next one if no branch
 
 }
@@ -23,6 +24,11 @@ public class Branch {
 
 }
 
+[Serializable]
+public class VoiceOver {
+    public int forDialog;
+    public AudioClip clip;
+}
 public enum DialogEffect {
-    Nothing,EndTheLoopAfterBoss, SaveMore,EndConv
+    Nothing,EndTheLoopAfterBoss, SaveMore,EndConv, StartBossFight
 }

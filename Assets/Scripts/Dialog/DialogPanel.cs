@@ -12,6 +12,9 @@ public class DialogPanel : MonoBehaviour
     Dictionary<int, Branch> branches;
     Branch branch = null;
     int dialogIndex = 0;
+    public SoundManager sm;
+    public AudioSource audioSource;
+    private Dictionary<int, VoiceOver> voiceOver;
 
     void Start()
     {
@@ -19,7 +22,7 @@ public class DialogPanel : MonoBehaviour
         text = transform.GetChild(0).gameObject.GetComponent<Text>();
         eOption = transform.GetChild(1).gameObject.GetComponent<Text>();
         qOption = transform.GetChild(2).gameObject.GetComponent<Text>();
-
+        audioSource = GetComponent<AudioSource>();
         if(dialog)
         SetDialog(dialog);
         
@@ -64,6 +67,9 @@ public class DialogPanel : MonoBehaviour
                 gameObject.SetActive(false);
                 pc.canTakeActions = true;
                 break;
+            case DialogEffect.StartBossFight:
+                if (sm) sm.TransitionBackgroundMusic(SoundManager.BackgroundMusic.BossMusic);
+                break;
         }
     }
 
@@ -75,6 +81,12 @@ public class DialogPanel : MonoBehaviour
         {
             branches.Add(branch.forDialog, branch);
         }
+
+        voiceOver = new Dictionary<int, VoiceOver>();
+        foreach (VoiceOver vo in dialog.voiceOvers)
+        {
+            voiceOver.Add(vo.forDialog, vo);
+        }
         SetDialogIndex(0);
     }
 
@@ -84,6 +96,10 @@ public class DialogPanel : MonoBehaviour
         text.text =  dialog.subDialogs[v];
         eOption.text = "[ E ] Next";
         qOption.text = "";
+        if (voiceOver.ContainsKey(v)) {
+            audioSource.clip = voiceOver[v].clip;
+            audioSource.Play();
+        }
         if (branches.ContainsKey(v))
         {
             branch = branches[v];

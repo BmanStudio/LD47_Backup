@@ -45,7 +45,7 @@ public class PlayerInventory : MonoBehaviour
         }
         
         Instance = this;
-        DontDestroyOnLoad( this.gameObject );
+        
     }
 
     void OnEnable()
@@ -133,6 +133,7 @@ public class PlayerInventory : MonoBehaviour
             if (_currentWeaponGameObject.GetComponent<PlayerWeapon>())
             {
                 var playerWeapon = _currentWeaponGameObject.GetComponent<PlayerWeapon>();
+                playerWeapon.fireClips = weapon.fireSounds;
                 _passiveStatsManager._playerWeapon = playerWeapon;
                 _playerController.Weapon = playerWeapon;
             }
@@ -292,6 +293,11 @@ public class PlayerInventory : MonoBehaviour
                 _currentWeaponGameObject.transform.parent= weaponSlotGameObject;
             }
         }
+    }
+
+    public Transform GetPlayerTransform()
+    {
+        return GetComponent<Transform>();
     }
 
 }

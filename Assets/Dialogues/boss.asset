@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2afdde1d411700349931786a4bc7614e, type: 3}
+  m_Name: boss
+  m_EditorClassIdentifier: 
+  subDialogs:
+  - 'So you''ve arrived! Is this the first time we''re meeting?  It doesn''t matter
+    though, there''s only one of you, you''re never going to be able to beat all
+    of me. '
+  - I'm ready for you, bring it!
+  voiceOvers:
+  - forDialog: 0
+    clip: {fileID: 8300000, guid: 3e9e3e474c4664f21960c589f6764adf, type: 3}
+  branches: []

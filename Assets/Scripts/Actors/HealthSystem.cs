@@ -12,6 +12,7 @@ public class HealthSystem : MonoBehaviour
 
     [SerializeField]
     Text healthIndicator = null;
+    [SerializeField] bool isBoss;
 
     // Added by Bman:
 
@@ -44,8 +45,13 @@ public class HealthSystem : MonoBehaviour
 
     private void Die()
     {
-        if (gameObject.GetComponent<PlayerController>()) {
+        if (gameObject.GetComponent<PlayerController>())
+        {
             UnityEngine.SceneManagement.SceneManager.LoadScene("GameOverScene");
+        }
+        else if (isBoss) {
+            SoundManager.instance.TransitionBackgroundMusic(SoundManager.BackgroundMusic.Victory);
+            Destroy(gameObject, 0);
         }
         //For now
         else Destroy(gameObject, 0);

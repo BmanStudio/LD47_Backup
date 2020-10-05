@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InteractableRaycaster : MonoBehaviour
 {
-   [SerializeField] [Range(0,20)] float interactionDistance=2f;
+    [SerializeField] [Range(0,20)] float interactionDistance=2f;
     [SerializeField] Text GUIHintText = null;
     public void Update()
     {
@@ -23,7 +23,7 @@ public class InteractableRaycaster : MonoBehaviour
     {
         Debug.DrawRay(transform.position, transform.forward.normalized* interactionDistance, Color.green);
         
-        return Physics.RaycastAll(transform.position, transform.forward.normalized, interactionDistance);
+        return Physics.RaycastAll(transform.position, transform.forward.normalized, 20);
     }
 
     private bool Interact(RaycastHit[] allHits)
@@ -34,6 +34,8 @@ public class InteractableRaycaster : MonoBehaviour
             var intObject = hit.transform.gameObject.GetComponent<InteractableObject>();
             if (!intObject) continue;
 
+            if (Vector3.Distance(hit.transform.position, gameObject.transform.position) > interactionDistance) continue;
+            
             if(GUIHintText)
             GUIHintText.text = intObject.HintText;
             

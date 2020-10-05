@@ -5,9 +5,11 @@ using System;
 public class RoomManager : MonoBehaviour
 {
     Dictionary<int, GameObject> rooms = new Dictionary<int, GameObject>();
-    public GameObject trainRepeat;
-    float room2Size = 40;
-
+    public GameObject[] repeatingRooms;
+    public GameObject bossRoom;
+    float room2Size = -1*(40+9.8f); //Room + Inbetween
+    public int bossRoomNumber = 9;
+    public int runTime = 1;
     internal void RegisterRoom(int index, GameObject gameObject)
     {
         rooms.Add(index, gameObject);
@@ -25,13 +27,14 @@ public class RoomManager : MonoBehaviour
     }
     void AddRoomAt(int index)
     {
-        if (index < 0) return;
-
-        Vector3 pos = new Vector3(index*room2Size, 0, 0);
+        if (index < 0 || index > bossRoomNumber) return;
+      
         if (!rooms.ContainsKey(index))
         {
-            
-            GameObject roomObj = Instantiate(trainRepeat, pos, Quaternion.identity);
+        Vector3 pos = new Vector3(index*room2Size, 0, 0);
+            GameObject roomObj = null;
+            if (index == bossRoomNumber) roomObj = Instantiate(bossRoom, pos, Quaternion.identity);
+            else roomObj = Instantiate(repeatingRooms[UnityEngine.Random.Range(0, repeatingRooms.Length)], pos, Quaternion.identity);
             // Added by Bman:
             //roomObj.isStatic = true;
             

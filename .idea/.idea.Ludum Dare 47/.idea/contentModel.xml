@@ -19,18 +19,42 @@
             </e>
           </e>
         </e>
-        <e p="Editor" t="Include">
-          <e p="FieldOfView_Editor.cs" t="Include" />
-        </e>
         <e p="MessageTrigger.cs" t="Include" />
         <e p="MTree" t="Include">
           <e p="Shaders" t="Include">
             <e p="Billboard.shader" t="Include" />
           </e>
         </e>
+        <e p="NavMeshComponents" t="Include">
+          <e p="Editor" t="Include">
+            <e p="NavMeshAssetManager.cs" t="Include" />
+            <e p="NavMeshComponentsEditor.asmdef" t="Include" />
+            <e p="NavMeshComponentsGUIUtility.cs" t="Include" />
+            <e p="NavMeshLinkEditor.cs" t="Include" />
+            <e p="NavMeshModifierEditor.cs" t="Include" />
+            <e p="NavMeshModifierVolumeEditor.cs" t="Include" />
+            <e p="NavMeshSurfaceEditor.cs" t="Include" />
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="NavMeshComponents.asmdef" t="Include" />
+            <e p="NavMeshLink.cs" t="Include" />
+            <e p="NavMeshModifier.cs" t="Include" />
+            <e p="NavMeshModifierVolume.cs" t="Include" />
+            <e p="NavMeshSurface.cs" t="Include" />
+          </e>
+        </e>
+        <e p="OLD_Delete" t="Include">
+          <e p="Editor" t="Include">
+            <e p="FieldOfView_Editor.cs" t="Include" />
+          </e>
+          <e p="StreamingAssets" t="Include">
+            <e p="desc.txt" t="Include" />
+          </e>
+        </e>
         <e p="Scripts" t="Include">
           <e p="Actors" t="Include">
             <e p="Enemy" t="Include">
+              <e p="ContactDamage.cs" t="Include" />
               <e p="DeleteBeforePublish" t="Include">
                 <e p="EnemyAttackRange.cs" t="Include" />
                 <e p="Navigation" t="Include">
@@ -67,6 +91,7 @@
           <e p="Interacting Objects system" t="Include">
             <e p="Interactable Objects" t="Include">
               <e p="Door.cs" t="Include" />
+              <e p="DoorLockTrigger.cs" t="Include" />
               <e p="NPC.cs" t="Include" />
               <e p="PickupItem.cs" t="Include" />
               <e p="PickupWeapon.cs" t="Include" />
@@ -96,19 +121,14 @@
             <e p="TickTockAnimatorTrigger.cs" t="Include" />
             <e p="TickTockEmitter.cs" t="Include" />
           </e>
-          <e p="Typewritter" t="Include">
-            <e p="Typewritter.cs" t="Include" />
-          </e>
           <e p="UI" t="Include">
             <e p="MainMenu.cs" t="Include" />
             <e p="SettingsChanger.cs" t="Include" />
+            <e p="UnlockMouse.cs" t="Include" />
           </e>
         </e>
         <e p="Shaders" t="Include">
           <e p="Toon.shader" t="Include" />
-        </e>
-        <e p="StreamingAssets" t="Include">
-          <e p="desc.txt" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
@@ -143,6 +163,8 @@
         </e>
       </e>
       <e p="Ludum Dare 47.sln" t="IncludeFlat" />
+      <e p="NavMeshComponents.csproj" t="IncludeRecursive" />
+      <e p="NavMeshComponentsEditor.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="Substance.EditorHelper.csproj" t="IncludeRecursive" />

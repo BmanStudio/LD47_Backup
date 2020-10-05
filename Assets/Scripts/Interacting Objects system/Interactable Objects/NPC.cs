@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class NPC : InteractableObject
 {
-    public DialogOpener dialogOpener;
     public Dialog_SO dialog;
     public override string HintText => "Press F to talk";
 
@@ -12,6 +11,6 @@ public class NPC : InteractableObject
 
     public override void Interact()
     {
-        dialogOpener.StartDialog(dialog);
+        DialogOpener.instance.StartDialog(dialog);
     }
 }

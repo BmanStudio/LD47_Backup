@@ -9,5 +9,6 @@ public class Room : MonoBehaviour
     void Start()
     {
         roomManager.RegisterRoom(index,this.gameObject);
+       
     }
 }

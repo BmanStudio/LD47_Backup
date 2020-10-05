@@ -7,7 +7,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 10.0f;
     [SerializeField] float jumpPower = 8;
     public bool canTakeActions = true;
-
+    public float stepRate = 0.5f;
+    public float stepCoolDown;
+    public AudioClip[] footsteps;
+    AudioSource source;
    PlayerWeapon _weapon = null;
 
     public PlayerWeapon Weapon
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         cam =GetComponentInChildren<Camera>();
         rigidBody = GetComponentInChildren<Rigidbody>();
+        source = GetComponent<AudioSource>();
         
     }
 
@@ -46,12 +50,21 @@ public class PlayerController : MonoBehaviour
         transform.Translate(camForward.normalized * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime,Space.World);
         transform.Translate(cam.transform.right * -Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, Space.World);
 
-        
-        if (Input.GetKeyDown(KeyCode.Space) && Physics.Raycast(transform.position, Vector3.down,1) ) {
+        bool canJump = Physics.Raycast(transform.position, Vector3.down, 1.1f);
+        Debug.DrawRay(transform.position, Vector3.down,Color.red);
+        if (Input.GetKeyDown(KeyCode.Space) && canJump ) {
             rigidBody.velocity += jumpPower * Vector3.up;
         }
         if (_weapon!=null && Input.GetKey(KeyCode.Mouse0)) {
-            _weapon.Fire(cam.transform.forward,gameObject);
+            _weapon.Fire(cam.transform.forward, gameObject);
+        }
+
+        stepCoolDown -= Time.deltaTime;
+        if ((Input.GetAxis("Horizontal") != 0f || Input.GetAxis("Vertical") != 0f) && stepCoolDown < 0f && canJump)
+        {
+            source.pitch = 1f + Random.Range(-0.2f, 0.2f);
+            source.PlayOneShot(footsteps[Random.Range(0,footsteps.Length)], 0.9f);
+            stepCoolDown = stepRate;
         }
     }
     
