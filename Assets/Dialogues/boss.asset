@@ -20,4 +20,11 @@ MonoBehaviour:
   voiceOvers:
   - forDialog: 0
     clip: {fileID: 8300000, guid: 3e9e3e474c4664f21960c589f6764adf, type: 3}
-  branches: []
+  branches:
+  - forDialog: 1
+    qBranch: -1
+    eBranch: -1
+    qBranchText: 
+    eBranchText: 
+    qEffect: 0
+    eEffect: 4

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2afdde1d411700349931786a4bc7614e, type: 3}
+  m_Name: DeathLamp
+  m_EditorClassIdentifier: 
+  subDialogs:
+  - Okay so
+  - You could either quit the game because you just defeated the boss
+  - Or.....
+  - You could go to the left ramp door and be an even greater hero!
+  - Thanks for playing this game demo!
+  voiceOvers: []
+  branches: []

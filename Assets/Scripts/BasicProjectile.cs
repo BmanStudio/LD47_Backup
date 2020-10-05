@@ -22,6 +22,10 @@ public class BasicProjectile : MonoBehaviour
         HealthSystem hs = other.GetComponent<HealthSystem>();
         if (hs != null && other.gameObject != Shooter) {
             hs.TakeDamage(damage);
+            ParticleSystem ps = other.GetComponentInChildren<ParticleSystem>();
+            if ( ps!=null) {
+                ps.Play();
+            }
         }
         if(!other.isTrigger && other.gameObject != Shooter) {
             Destroy(this.gameObject, 0);

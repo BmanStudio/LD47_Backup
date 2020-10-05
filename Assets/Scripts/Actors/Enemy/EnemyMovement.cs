@@ -10,10 +10,10 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float _idleSpeed = 5f;
     [SerializeField] private float _chaseSpeed = 8.5f;
     [SerializeField] private float rotateToPlayerSpeed = 2f;
+    [SerializeField] Animator animator;
 
     private bool _isRotationg = false;
     private Transform _lookAtTarget;
-    private float _rotationCompareThreshold = 0.3f;
 
     void OnEnable()
     {
@@ -23,6 +23,7 @@ public class EnemyMovement : MonoBehaviour
         _navMeshAgent.height = _enemyHeight;
         _navMeshAgent.autoBraking = true;
         _navMeshAgent.speed = _idleSpeed;
+        
     }
 
     void Update()
@@ -34,6 +35,12 @@ public class EnemyMovement : MonoBehaviour
  
             transform.rotation =
                 Quaternion.Slerp(transform.rotation, lookOnLook, rotateToPlayerSpeed * Time.deltaTime);
+        }
+
+        if (animator) { 
+        
+        animator.SetFloat("Horizontal", _navMeshAgent.velocity.x);
+        animator.SetFloat("Vertical", _navMeshAgent.velocity.z);
         }
     }
     

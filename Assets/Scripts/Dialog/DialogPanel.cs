@@ -12,7 +12,6 @@ public class DialogPanel : MonoBehaviour
     Dictionary<int, Branch> branches;
     Branch branch = null;
     int dialogIndex = 0;
-    public SoundManager sm;
     public AudioSource audioSource;
     private Dictionary<int, VoiceOver> voiceOver;
 
@@ -36,11 +35,20 @@ public class DialogPanel : MonoBehaviour
                 //If we dont know where to go next, we go next :)
                 if (dialogIndex < dialog.subDialogs.Count)
                 {
+                    
                     SetDialogIndex(dialogIndex);
                 }
-                else { gameObject.SetActive(false); pc.canTakeActions = true; }//if we don't have what to say we say nothing :))))))
+                else
+                {
+                    gameObject.SetActive(false); 
+                    pc.canTakeActions = true; //if we don't have what to say we say nothing :))))))
+                }
+                if (branch != null) {
+                    ApplyEffect(branch.eEffect);
+                }
             }
             else {
+
                 ApplyEffect(branch.eEffect);
                 SetDialogIndex(branch.eBranch);
             }
@@ -68,7 +76,7 @@ public class DialogPanel : MonoBehaviour
                 pc.canTakeActions = true;
                 break;
             case DialogEffect.StartBossFight:
-                if (sm) sm.TransitionBackgroundMusic(SoundManager.BackgroundMusic.BossMusic);
+                SoundManager.instance.TransitionBackgroundMusic(SoundManager.BackgroundMusic.BossMusic);
                 break;
         }
     }

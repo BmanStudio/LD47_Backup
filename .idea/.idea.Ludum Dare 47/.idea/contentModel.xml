@@ -54,6 +54,7 @@
         <e p="Scripts" t="Include">
           <e p="Actors" t="Include">
             <e p="Enemy" t="Include">
+              <e p="Boss.cs" t="Include" />
               <e p="ContactDamage.cs" t="Include" />
               <e p="DeleteBeforePublish" t="Include">
                 <e p="EnemyAttackRange.cs" t="Include" />
@@ -80,6 +81,7 @@
             </e>
           </e>
           <e p="BasicProjectile.cs" t="Include" />
+          <e p="CameraShaderSettings.cs" t="Include" />
           <e p="CenterDot" t="Include">
             <e p="CenterDot.cs" t="Include" />
           </e>

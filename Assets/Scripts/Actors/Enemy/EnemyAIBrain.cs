@@ -16,6 +16,7 @@ namespace Assets.Scripts.Actors.Enemy
         [SerializeField] public float HardSearchTime = 5;
         [SerializeField] public float RespondeAttackTime = 3;
         [SerializeField] Animator animator=null;
+        [SerializeField] private float lightIntensity = 5f;
 
 
         public float DetectStateDelayTime = 1;
@@ -129,6 +130,7 @@ namespace Assets.Scripts.Actors.Enemy
                 // If the AI see the player
                 if (_fieldOfView.visibleTargets.Count > 0)
                 {
+                   
                     // Safety throw:
                     if (_fieldOfView.visibleTargets.Count > 1)
                     {
@@ -183,7 +185,7 @@ namespace Assets.Scripts.Actors.Enemy
                         {
                             _hardSearchTimer = _enemyAiBrain.HardSearchTime;
                             CurrentState = State.HardSearch;
-                            _fieldOfView.SetupLight(Color.magenta, 2);
+                            _fieldOfView.SetupLight(Color.magenta);
                         }
                     }
                     
@@ -283,6 +285,7 @@ namespace Assets.Scripts.Actors.Enemy
                 // If the AI cant see the player
                 else
                 {
+                    
                     if (_enemyMovement.GetIsRotatingToPlayer() && _respondeAttackTimer <= 0)
                     {
                         _enemyMovement.StopLookingAtTarget();
@@ -390,29 +393,7 @@ namespace Assets.Scripts.Actors.Enemy
                 CurrentState = State.Attack;
                 _fieldOfView.SetupLight(Color.red, 4);
                 
-                /*if (_enemyAiBrain.GetPlayerInAttackRange(player.position))
-                {
-                    CurrentState = State.Attack;
-                    _fieldOfView.SetupLight(Color.red, 4);
-                }
-                
-                else
-                {
-                    _enemyMovement.GoToTarget(player);
-                }*/
-                
-                /*if (CurrentState != State.Attack && CurrentState != State.HardSearch)
-                {
-                    _enemyMovement.ToggleChaseSpeed(true);
-                    _hardSearchTimer = _enemyAiBrain.HardSearchTime;
-                    CurrentState = State.HardSearch;
-                    _fieldOfView.SetupLight(Color.magenta, 2);
-                }
-                else
-                {
-                    CurrentState = State.Attack;
-                    _fieldOfView.SetupLight(Color.red, 4);
-                }*/
+             
             }
 
             /// <summary>

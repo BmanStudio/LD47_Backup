@@ -27,13 +27,13 @@ public class RoomManager : MonoBehaviour
     }
     void AddRoomAt(int index)
     {
-        if (index < 0 || index > bossRoomNumber) return;
+        if (index < 0 ) return;
       
         if (!rooms.ContainsKey(index))
         {
         Vector3 pos = new Vector3(index*room2Size, 0, 0);
             GameObject roomObj = null;
-            if (index == bossRoomNumber) roomObj = Instantiate(bossRoom, pos, Quaternion.identity);
+            if (index % bossRoomNumber == 0) roomObj = Instantiate(bossRoom, pos, Quaternion.identity);
             else roomObj = Instantiate(repeatingRooms[UnityEngine.Random.Range(0, repeatingRooms.Length)], pos, Quaternion.identity);
             // Added by Bman:
             //roomObj.isStatic = true;

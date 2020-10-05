@@ -12,13 +12,14 @@ public class HealthSystem : MonoBehaviour
 
     [SerializeField]
     Text healthIndicator = null;
-    [SerializeField] bool isBoss;
+    [SerializeField] bool isBoss=false;
 
     // Added by Bman:
 
     public delegate void ActorInjury();
 
     public event ActorInjury OnTookDamage;
+    public AudioClip[] hurtClip;
     
     private float startingMaxHealth;
     void Awake()
@@ -82,6 +83,7 @@ public class HealthSystem : MonoBehaviour
 
     protected virtual void OnOnTookDamage()
     {
+        if (hurtClip.Length>0) GetComponent<AudioSource>().PlayOneShot(hurtClip[UnityEngine.Random.Range(0,hurtClip.Length)]);
         OnTookDamage?.Invoke();
     }
 }

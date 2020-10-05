@@ -68,7 +68,7 @@ public class FieldOfView : MonoBehaviour
             Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
 
-    public void SetupLight(Color color, float intensity = 1)
+    public void SetupLight(Color color, float intensity = 15)
     {
         if (_visionSpotLight != null)
         {
